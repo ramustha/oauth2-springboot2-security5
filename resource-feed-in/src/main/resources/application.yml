@@ -1,0 +1,20 @@
+server:
+  port: 9000
+
+#security:
+#  oauth2:
+#    resource:
+#      jwt:
+#        key-uri: http://ramustha.com:9999/oauth/token_key
+
+spring:
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          jwk-set-uri: http://localhost:9999/.well-known/jwks.json
+
+logging:
+  level:
+#    ROOT: INFO
+    com.ramusthastudio: DEBUG

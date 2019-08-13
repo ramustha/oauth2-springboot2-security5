@@ -1,0 +1,30 @@
+server:
+  port: 9999
+
+keystore:
+  path: jwt.pfx
+  alias: authserver
+  password: password
+
+spring:
+  thymeleaf:
+    cache: false
+  datasource:
+    url: jdbc:h2:mem:sample_oauth_server
+    username: sa
+    password: password
+#    url: jdbc:postgresql://192.168.10.33:5432/sample_oauth_server
+#    username: postgres
+#    password: postgres
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: false
+  h2:
+    console:
+      enabled: true
+
+logging:
+  level:
+#    ROOT: INFO
+    com.ramusthastudio: DEBUG
