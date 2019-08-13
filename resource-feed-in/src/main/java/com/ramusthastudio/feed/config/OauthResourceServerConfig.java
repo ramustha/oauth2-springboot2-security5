@@ -4,7 +4,6 @@ import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationConverter;
 
 import static org.springframework.security.config.Customizer.withDefaults;
 
@@ -22,9 +21,7 @@ public class OauthResourceServerConfig extends WebSecurityConfigurerAdapter {
 					.anyRequest().authenticated()
 			)
 			.oauth2ResourceServer()
-				.jwt()
-					.jwtAuthenticationConverter(new JwtAuthenticationConverter());
-
+				.jwt(withDefaults());
 		// @formatter:on
   }
 }
