@@ -28,25 +28,25 @@ public class ProfileController {
   // TESTING ONLY
 
   @GetMapping("/news/all")
-  @PreAuthorize("hasAuthority('SYND_READ')")
+  @PreAuthorize("hasAuthority('synd_read')")
   public String allNews() {
     return "User @PreAuthorize(\"hasAuthority('SYND_READ')\")";
   }
 
   @GetMapping("/source/all")
-  @PostAuthorize("hasAuthority('SOURCE_READ')")
+  @PostAuthorize("hasAuthority('source_read')")
   public String allSources() {
     return "User @PostAuthorize(\"hasAuthority('SOURCE_READ')\")";
   }
 
   @GetMapping("/news/delete")
-  @PreAuthorize("hasAuthority('SYND_DELETE')")
+  @PreAuthorize("hasAuthority('synd_delete')")
   public String deleteAllNews() {
     return "User @PreAuthorize(\"hasAuthority('SYND_DELETE')\")";
   }
 
   @GetMapping("/source/delete")
-  @PostAuthorize("hasAuthority('SOURCE_DELETE')")
+  @PostAuthorize("hasAuthority('source_delete')")
   public String deleteAllSources() {
     return "User @PostAuthorize(\"hasAuthority('SOURCE_DELETE')\")";
   }

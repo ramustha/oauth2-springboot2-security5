@@ -23,15 +23,15 @@ import org.springframework.security.oauth2.config.annotation.web.configurers.Aut
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerSecurityConfigurer;
 import org.springframework.security.oauth2.provider.endpoint.FrameworkEndpoint;
 import org.springframework.security.oauth2.provider.token.TokenStore;
+import org.springframework.security.oauth2.provider.token.store.JdbcTokenStore;
 import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenConverter;
-import org.springframework.security.oauth2.provider.token.store.JwtTokenStore;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 @Configuration
 @Import({
     AuthorizationServerConfig.JwkSetEndpoint.class,
-    AuthorizationServerConfig.JwkSetEndpointConfiguration.class
+    AuthorizationServerConfig.JwkSetEndpointConfiguration.class,
 })
 public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdapter {
   private final DataSource dataSource;
@@ -62,7 +62,7 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
 
   @Bean
   public TokenStore tokenStore() {
-    return new JwtTokenStore(accessTokenConverter());
+    return new JdbcTokenStore(dataSource);
   }
 
   @Override
@@ -76,8 +76,7 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
     aEndpoints
         .authenticationManager(authenticationManager)
         .accessTokenConverter(accessTokenConverter())
-        .tokenStore(tokenStore())
-        .userDetailsService(userDetailsService);
+        .tokenStore(tokenStore());
   }
 
   @Override

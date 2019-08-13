@@ -50,7 +50,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		aHttp
 			.authorizeRequests(authorizeRequests ->
 				authorizeRequests
-					.antMatchers(HttpMethod.GET, "/oauth/userinfo").hasAuthority("SCOPE_PROFILE")
+					.antMatchers(HttpMethod.GET, "/oauth/userinfo").hasAuthority("SCOPE_profile")
 					.anyRequest().authenticated()
 			)
        .formLogin()
