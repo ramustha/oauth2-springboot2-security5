@@ -17,7 +17,7 @@ spring:
             client-authentication-method: basic
             authorization-grant-type: authorization_code
             redirect-uri: "{baseUrl}/login/oauth2/code/{registrationId}"
-            scope: PROFILE,SOURCE_READ,SYND_READ
+            scope: profile,source_read,synd_read
             client-name: Synd
         provider:
           synd:
