@@ -1,12 +1,6 @@
 server:
   port: 9000
 
-#security:
-#  oauth2:
-#    resource:
-#      jwt:
-#        key-uri: http://ramustha.com:9999/oauth/token_key
-
 spring:
   security:
     oauth2:
