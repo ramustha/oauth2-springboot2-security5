@@ -23,6 +23,11 @@ spring:
   h2:
     console:
       enabled: true
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          jwk-set-uri: http://localhost:${server.port}/.well-known/jwks.json
 
 logging:
   level:

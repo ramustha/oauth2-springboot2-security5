@@ -3,6 +3,7 @@ package com.ramusthastudio.authserver.config;
 import com.ramusthastudio.authserver.service.UserDetailsServiceImpl;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
@@ -12,6 +13,8 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
+
+import static org.springframework.security.config.Customizer.withDefaults;
 
 // read this https://www.baeldung.com/spring-security-method-security
 
@@ -43,12 +46,18 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
   @Override
   protected void configure(HttpSecurity aHttp) throws Exception {
-    aHttp
-        .authorizeRequests()
-        .anyRequest().authenticated()
-        .and()
-        .formLogin()
-        .permitAll()
-        .defaultSuccessUrl("/");
+    // @formatter:off
+		aHttp
+			.authorizeRequests(authorizeRequests ->
+				authorizeRequests
+					.antMatchers(HttpMethod.GET, "/oauth/userinfo").hasAuthority("SCOPE_PROFILE")
+					.anyRequest().authenticated()
+			)
+       .formLogin()
+       .permitAll()
+      .and()
+			  .oauth2ResourceServer()
+				  .jwt(withDefaults());
+		// @formatter:on
   }
 }
