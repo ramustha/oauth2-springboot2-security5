@@ -30,6 +30,19 @@ public class NewsController {
         .bodyToMono(String.class)
         .block();
     aModel.addAttribute("news", attribute);
-    return "allnews";
+    return "news";
+  }
+
+  @GetMapping("/sources")
+  public String apiSources(Model aModel, @RegisteredOAuth2AuthorizedClient OAuth2AuthorizedClient aAuthorizedClient) {
+    String attribute = webClient
+        .get()
+        .uri(uri + "/api/source/all")
+        .attributes(oauth2AuthorizedClient(aAuthorizedClient))
+        .retrieve()
+        .bodyToMono(String.class)
+        .block();
+    aModel.addAttribute("sources", attribute);
+    return "sources";
   }
 }

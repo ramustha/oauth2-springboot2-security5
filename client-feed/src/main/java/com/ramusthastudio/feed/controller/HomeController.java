@@ -32,6 +32,7 @@ public class HomeController {
   public String userinfo(Model aModel, @RegisteredOAuth2AuthorizedClient OAuth2AuthorizedClient aAuthorizedClient) {
     String userInfoEndpointUri = aAuthorizedClient.getClientRegistration()
         .getProviderDetails().getUserInfoEndpoint().getUri();
+
     Map userAttributes = webClient
         .get()
         .uri(userInfoEndpointUri)

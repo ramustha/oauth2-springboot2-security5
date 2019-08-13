@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head>
+	<title>Spring Security - OAuth 2.0</title>
+	<meta charset="utf-8" />
+</head>
+<body>
+<div th:replace="index::logout"></div>
+<h1>OAuth 2.0 News</h1>
+<div>
+	<span style="font-weight:bold" th:text="${news}"></span>
+</div>
+</body>
+</html>

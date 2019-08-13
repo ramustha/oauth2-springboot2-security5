@@ -8,9 +8,10 @@ spring:
     oauth2:
       client:
         registration:
-          google:
-            client-id: 421431368218-12qqkdim8li3i78coui5s4jfu3q3dmv6.apps.googleusercontent.com
-            client-secret: RN6_0R3MGmP4LyBH5LJ8hvdP
+#          google:
+#            client-id: 421431368218-12qqkdim8li3i78coui5s4jfu3q3dmv6.apps.googleusercontent.com
+#            client-secret: RN6_0R3MGmP4LyBH5LJ8hvdP
+#            scope: profile
           synd:
             client-id: c00001
             client-secret: password
