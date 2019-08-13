@@ -13,7 +13,8 @@ spring:
       resourceserver:
         jwt:
           jwk-set-uri: http://localhost:9999/.well-known/jwks.json
+
 logging:
   level:
-#    ROOT: INFO
+    #    ROOT: INFO
     com.ramusthastudio: DEBUG

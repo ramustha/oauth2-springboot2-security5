@@ -16,8 +16,8 @@ public class OauthResourceServerConfig extends WebSecurityConfigurerAdapter {
 		http
 			.authorizeRequests(authorizeRequests ->
 				authorizeRequests
-					.antMatchers(HttpMethod.GET, "/news/**").hasAuthority("SCOPE_SYND_READ")
-					.antMatchers(HttpMethod.GET, "/source/**").hasAuthority("SCOPE_SOURCE_READ")
+					.antMatchers(HttpMethod.GET, "/api/news/**").hasAuthority("SCOPE_SYND_READ")
+					.antMatchers(HttpMethod.GET, "/api/source/**").hasAuthority("SCOPE_SOURCE_READ")
 					.anyRequest().authenticated()
 			)
 			.oauth2ResourceServer()
