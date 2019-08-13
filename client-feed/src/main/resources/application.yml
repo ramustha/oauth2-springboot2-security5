@@ -26,7 +26,9 @@ spring:
             jwk-set-uri: http://ramustha.com:9999/.well-known/jwks.json
             user-info-uri: http://ramustha.com:9999/oauth/userinfo
             user-info-authentication-method: header
-            user-name-attribute: client_id
+            user-name-attribute: sub
+
+resource-uri: http://localhost:9000
 
 logging:
   level:
