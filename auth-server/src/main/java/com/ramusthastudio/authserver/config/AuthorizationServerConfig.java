@@ -33,7 +33,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
     AuthorizationServerConfig.JwkSetEndpoint.class,
     AuthorizationServerConfig.JwkSetEndpointConfiguration.class
 })
-// @EnableAuthorizationServer
 public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdapter {
   private final DataSource dataSource;
   private final UserDetailsService userDetailsService;
@@ -56,7 +55,7 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
 
   @Bean
   public JwtAccessTokenConverter accessTokenConverter() {
-    JwtAccessTokenConverter converter = new AccessTokenConverter();
+    JwtAccessTokenConverter converter = new SubjectAttributeUserTokenConverter();
     converter.setKeyPair(keyPair);
     return converter;
   }
@@ -86,6 +85,10 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
     aClients.jdbc(dataSource).passwordEncoder(passwordEncoder);
   }
 
+  /**
+   * Legacy Authorization Server (spring-security-oauth2) does not support any
+   * <a href target="_blank" href="https://tools.ietf.org/html/rfc7517#section-5">JWK Set</a> endpoint.
+   **/
   @FrameworkEndpoint
   static class JwkSetEndpoint {
     KeyPair keyPair;

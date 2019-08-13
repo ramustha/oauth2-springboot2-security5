@@ -15,7 +15,7 @@ public class ProfileController {
     return aPrincipal;
   }
 
-  // this consume for oauth client
+  // this provide for oauth client
   @GetMapping("/oauth/userinfo")
   public Object oauthUserinfo(Principal aPrincipal) {
     if (aPrincipal instanceof JwtAuthenticationToken) {
