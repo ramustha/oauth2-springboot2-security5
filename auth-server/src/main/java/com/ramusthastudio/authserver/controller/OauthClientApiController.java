@@ -44,7 +44,7 @@ public class OauthClientApiController {
     return "clientapi";
   }
 
-  @GetMapping("/createclientapi")
+  @GetMapping("/clientapi/create")
   public String createClientApiForm(Model aModel, UsernamePasswordAuthenticationToken aAuthentication) {
     User user = (User) aAuthentication.getPrincipal();
 
@@ -60,7 +60,7 @@ public class OauthClientApiController {
     return "createclientapi";
   }
 
-  @PostMapping("/createclientapi")
+  @PostMapping("/clientapi/create")
   public String createClientApiSubmit(Model aModel, UsernamePasswordAuthenticationToken aAuthentication,
       @ModelAttribute("newClientApi") OauthClientDetails aNewClientApi) {
 
@@ -80,15 +80,15 @@ public class OauthClientApiController {
       User savedUser = userRepository.save(user);
       if (savedUser != null) {
         aModel.addAttribute("createClientSuccess", "Successfully registered " + aNewClientApi.getClientId() + ".");
-        return "redirect:clientapi";
+        return "redirect:/clientapi";
       }
     }
 
     aModel.addAttribute("createClientFailed", "Failed registered.");
-    return "redirect:createclientapi";
+    return "redirect:/clientapi/create";
   }
 
-  @GetMapping("/updateclientapi")
+  @GetMapping("/clientapi/update")
   public String updateClientApiForm(Model aModel, @RequestParam("id") String aId, UsernamePasswordAuthenticationToken aAuthentication) {
     Optional<OauthClientDetails> byId = oauthClientDetailsRepository.findById(aId);
     if (byId.isPresent()) {
@@ -100,7 +100,7 @@ public class OauthClientApiController {
     return "updateclientapi";
   }
 
-  @PostMapping("/updateclientapi")
+  @PostMapping("/clientapi/update")
   public String updateClientApiSubmit(Model aModel, UsernamePasswordAuthenticationToken aAuthentication,
       @ModelAttribute("clientApi") OauthClientDetails aNewClientApi) {
     User user = (User) aAuthentication.getPrincipal();
@@ -117,11 +117,11 @@ public class OauthClientApiController {
       User savedUser = userRepository.save(user);
       if (savedUser != null) {
         aModel.addAttribute("createClientSuccess", "Successfully update " + aNewClientApi.getClientId() + ".");
-        return "redirect:clientapi";
+        return "redirect:/clientapi";
       }
     }
 
     aModel.addAttribute("createClientFailed", "Failed update.");
-    return "redirect:updateclientapi";
+    return "redirect:/clientapi/update";
   }
 }

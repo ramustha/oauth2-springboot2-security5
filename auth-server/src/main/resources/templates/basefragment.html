@@ -1,16 +1,57 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
-  <head th:fragment="head">
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title th:include=":: #title">Generic Title</title>
-    <link rel="stylesheet" th:href="@{/webjars/bootstrap/4.3.1/css/bootstrap.min.css}"/>
-    <link rel="stylesheet" th:href="@{/css/general.css}"/>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:fragment="head">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title th:include=":: #title">Generic Title</title>
+  <link rel="stylesheet" th:href="@{/webjars/bootstrap/4.3.1/css/bootstrap.min.css}"/>
+  <link rel="stylesheet" th:href="@{/css/general.css}"/>
 
-    <script th:src="@{/webjars/jquery/3.4.1/jquery.min.js}"></script>
-    <script th:src="@{/js/generatetoken.js}"></script>
-  </head>
-  <body>
-    <div th:fragment="container"> <!--fragment for content--> </div>
-  </body>
+  <script th:src="@{https://code.jquery.com/jquery-3.3.1.slim.min.js}"></script>
+
+  <script th:src="@{/webjars/bootstrap/4.3.1/js/bootstrap.min.js}"></script>
+  <script th:src="@{/webjars/jquery/3.4.1/jquery.min.js}"></script>
+<!--  <script th:src="@{/webjars/jquery/3.4.1/jquery.slim.min.js}"></script>-->
+  <script th:src="@{/webjars/popper.js/1.14.3/umd/popper.min.js}"></script>
+  <script th:src="@{/js/generatetoken.js}"></script>
+  <script th:src="@{/js/general.js}"></script>
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-light bg-light" sec:authorize="isAuthenticated()">
+  <a class="navbar-brand" href="#">Bootstrap</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse"
+          data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+          aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item">
+        <a class="nav-link home" th:href="@{/}">Home <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item" sec:authorize="hasRole('ROLE_ADMIN')">
+        <a class="nav-link users" th:href="@{/users}">Users</a>
+      </li>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle clientapi" href="#" id="navbarDropdown" role="button"
+           data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Client API
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" th:href="@{/clientapi/create}">Create client API</a>
+          <a class="dropdown-item" th:href="@{/clientapi}">View client API</a>
+        </div>
+      </li>
+    </ul>
+    <span id="username" class="nav-link mr-sm-2" sec:authentication="name"></span>
+    <form class="form-inline my-2 my-lg-0" action="#" th:action="@{/logout}" method="post">
+      <input class="form-control mr-sm-2" type="submit" value="Logout" aria-label="Search"/>
+    </form>
+  </div>
+</nav>
+
+<div th:fragment="container"> <!--fragment for content--> </div>
+</body>
 </html>

@@ -5,17 +5,10 @@
   <title id="title">Dashboard</title>
 </head>
 <div class="container">
-  <div style="float: right" th:fragment="logout" sec:authorize="isAuthenticated()">
-    <div style="float:left">
-      <span style="font-weight:bold">User: </span><span sec:authentication="name"></span>
-    </div>
-  </div>
-  <div>&nbsp;</div>
-
   <div th:if="${newClientApi}">
     <h3>Register client API</h3>
     <div>&nbsp;</div>
-    <form method="post" th:object="${newClientApi}" th:action="@{/createclientapi}">
+    <form method="post" th:object="${newClientApi}" th:action="@{/clientapi/create}">
       <div th:if="${createClientFailed}" th:text="${createClientFailed}" class="alert alert-danger">Failed registered.</div>
       <div th:if="${createClientSuccess}" th:text="${createClientSuccess}" class="alert alert-success">Successfully registered.</div>
 

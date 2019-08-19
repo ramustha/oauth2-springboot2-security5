@@ -5,18 +5,11 @@
   <title id="title">Dashboard</title>
 </head>
 <div class="container">
-  <div style="float: right" th:fragment="logout" sec:authorize="isAuthenticated()">
-    <div style="float:left">
-      <span style="font-weight:bold">User: </span><span id="username" sec:authentication="name"></span>
-    </div>
-  </div>
-  <div>&nbsp;</div>
-
   <div th:if="${updateClientFailed}" th:text="${updateClientFailed}" class="alert alert-danger">Client not found.</div>
   <div th:if="${clientApi}">
     <h3>Register client API</h3>
     <div>&nbsp;</div>
-    <form method="post" th:object="${clientApi}" th:action="@{/updateclientapi}">
+    <form method="post" th:object="${clientApi}" th:action="@{/clientapi/update}">
       <div class="form-group row">
         <label for="currentclientId" class="col-sm-2 col-form-label">Client-ID</label>
         <div class="col-sm-10">

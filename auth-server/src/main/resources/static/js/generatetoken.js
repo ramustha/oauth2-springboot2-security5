@@ -11,7 +11,7 @@ jQuery(function ($) {
       grant_type: 'password'
     });
 
-    $.ajax({
+    jQuery.ajax({
       type: 'POST',
       url: '/oauth/token',
       data: values,

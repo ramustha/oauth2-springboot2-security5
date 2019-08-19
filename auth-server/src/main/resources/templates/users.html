@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:include="basefragment">
+  <title id="title">Users</title>
+</head>
+<div class="container" sec:authorize="hasRole('ROLE_ADMIN')">
+  <h3>Registered Users</h3>
+  <table class="table table-striped">
+    <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Username</th>
+      <th scope="col">Email</th>
+      <th scope="col">Enable</th>
+      <th scope="col">NonExpired</th>
+      <th scope="col">Credentials NonExpired</th>
+      <th scope="col">NonLocked</th>
+      <th scope="col"></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="user, iter : ${users}">
+      <th scope="row" th:text="${iter.count}"></th>
+      <td th:text="${user.username}"></td>
+      <td th:text="${user.email}"></td>
+      <td><input type="checkbox" th:checked="${user.enabled}"></td>
+      <td><input type="checkbox" th:checked="${user.isAccountNonExpired()}"></td>
+      <td><input type="checkbox" th:checked="${user.isCredentialsNonExpired()}"></td>
+      <td><input type="checkbox" th:checked="${user.isAccountNonLocked()}"></td>
+      <td><a th:href="${'/users/update?id=' + user.id}">View</a></td>
+    </tr>
+    </tbody>
+  </table>
+</div>
