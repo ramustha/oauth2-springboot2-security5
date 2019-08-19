@@ -31,5 +31,5 @@ spring:
 
 logging:
   level:
-#    ROOT: INFO
+    ROOT: INFO
     com.ramusthastudio: DEBUG

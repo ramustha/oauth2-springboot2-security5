@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:include="basefragment">
+  <title id="title">Dashboard</title>
+</head>
+<div class="container">
+  <div style="float: right" th:fragment="logout" sec:authorize="isAuthenticated()">
+    <div style="float:left">
+      <span style="font-weight:bold">User: </span><span sec:authentication="name"></span>
+    </div>
+  </div>
+  <div>&nbsp;</div>
+
+  <div th:if="${newClientApi}">
+    <h3>Register client API</h3>
+    <div>&nbsp;</div>
+    <form method="post" th:object="${newClientApi}" th:action="@{/createclientapi}">
+      <div th:if="${createClientFailed}" th:text="${createClientFailed}" class="alert alert-danger">Failed registered.</div>
+      <div th:if="${createClientSuccess}" th:text="${createClientSuccess}" class="alert alert-success">Successfully registered.</div>
+
+      <div class="form-group row">
+        <label for="clientId" class="col-sm-2 col-form-label">Client-ID</label>
+        <div class="col-sm-10">
+          <input type="text" class="form-control" id="clientId" th:field="*{clientId}" readonly>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="clientSecret" class="col-sm-2 col-form-label">Client-Secret</label>
+        <div class="col-sm-10">
+          <input type="text" class="form-control" id="clientSecret" th:field="*{clientSecret}" readonly>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="scope" class="col-sm-2 col-form-label">Scope</label>
+        <div class="col-sm-10">
+          <input type="text" class="form-control" id="scope" th:field="*{scope}" readonly>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="webServerRedirectUri" class="col-sm-2 col-form-label">Callback URI</label>
+        <div class="col-sm-10">
+          <input type="url" class="form-control" id="webServerRedirectUri" th:field="*{webServerRedirectUri}" placeholder="https://www/example.com" required autofocus>
+        </div>
+      </div>
+      <button type="submit" class="btn btn-primary">Register</button>
+      <button type="reset" class="btn btn-primary">Reset</button>
+    </form>
+  </div>
+</div>

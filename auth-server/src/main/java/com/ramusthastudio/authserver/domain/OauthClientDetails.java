@@ -1,9 +1,9 @@
 package com.ramusthastudio.authserver.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.Serializable;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import lombok.AllArgsConstructor;
@@ -15,13 +15,22 @@ import org.hibernate.annotations.GenericGenerator;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "s_passwords")
-public class Passwords implements Serializable {
-
+@Table(name = "oauth_client_details")
+public class OauthClientDetails implements Serializable {
   @Id
   @GeneratedValue(generator = "uuid")
   @GenericGenerator(name = "uuid", strategy = "uuid2")
   private String id;
-  private String currentPassword;
-  private String oldPassword;
+  private String clientId;
+  @JsonIgnore
+  private String clientSecret;
+  private String resourceIds;
+  private String scope;
+  private String authorizedGrantTypes;
+  private String webServerRedirectUri;
+  private String authorities;
+  private int accessTokenValidity;
+  private int refreshTokenValidity;
+  private String additionalInformation;
+  private boolean autoapprove;
 }

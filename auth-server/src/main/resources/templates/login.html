@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:include="basefragment">
+  <title id="title">Login</title>
+</head>
+<div class="container">
+  <form class="form-signin" method="post" th:action="@{/login}">
+    <h2 class="form-signin-heading">Please sign in</h2>
+    <div th:if="${param.error}" class="alert alert-danger">Invalid username and password.</div>
+    <div th:if="${param.logout}" class="alert alert-success">You have been logged out.</div>
+    <div th:if="${param.registerSuccess}" th:text="${param.registerSuccess}" class="alert alert-success">Register success.</div>
+    <p>
+      <label for="username" class="sr-only">Username</label>
+      <input type="text" id="username" name="username" class="form-control" placeholder="Username" required autofocus>
+    </p>
+    <p>
+      <label for="password" class="sr-only">Password</label>
+      <input type="password" id="password" name="password" class="form-control" placeholder="Password" required>
+    </p>
+    <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+    <a th:href="@{/register}">register</a>
+  </form>
+</div>
+</html>

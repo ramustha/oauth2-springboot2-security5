@@ -3,6 +3,7 @@ package com.ramusthastudio.authserver.domain;
 import java.io.Serializable;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import lombok.AllArgsConstructor;
@@ -16,13 +17,13 @@ import org.hibernate.annotations.GenericGenerator;
 @NoArgsConstructor
 @Builder
 @Entity
-@Table(name = "s_permissions")
-public class Permissions implements Serializable {
+@Table(name = "s_password")
+public class Password implements Serializable {
 
   @Id
   @GeneratedValue(generator = "uuid")
   @GenericGenerator(name = "uuid", strategy = "uuid2")
   private String id;
-  private String label;
-  private String value;
+  private String currentPassword;
+  private String oldPassword;
 }

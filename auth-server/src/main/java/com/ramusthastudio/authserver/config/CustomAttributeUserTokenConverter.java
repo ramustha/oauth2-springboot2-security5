@@ -12,7 +12,7 @@ import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenCo
  * better to adhere to the {@code sub} property defined in the
  * <a target="_blank" href="https://tools.ietf.org/html/rfc7519">JWT Specification</a>.
  */
-public class SubjectAttributeUserTokenConverter extends JwtAccessTokenConverter {
+public class CustomAttributeUserTokenConverter extends JwtAccessTokenConverter {
   @Override
   public OAuth2AccessToken enhance(OAuth2AccessToken aAccessToken, OAuth2Authentication aAuthentication) {
     LinkedHashMap<String, Object> info = new LinkedHashMap<>(aAccessToken.getAdditionalInformation());

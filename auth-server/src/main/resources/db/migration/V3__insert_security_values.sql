@@ -1,5 +1,5 @@
 -- $2a$10$kTAw0Z.BXg6UfH9b1UioE.cZl7ObfpT9RWGULtfOUjE5B3g8ZJhKK is password
-INSERT INTO S_USERS (ID,
+INSERT INTO S_USER (ID,
                      USERNAME,
                      EMAIL,
                      ENABLED,
@@ -14,7 +14,7 @@ INSERT INTO S_USERS (ID,
     ('u00006', 'accountLocked', 'accountLocked@example.com', TRUE, TRUE, TRUE, FALSE);
 
 -- $2a$10$kTAw0Z.BXg6UfH9b1UioE.cZl7ObfpT9RWGULtfOUjE5B3g8ZJhKK is password
-INSERT INTO S_PASSWORDS (ID, CURRENT_PASSWORD, OLD_PASSWORD)
+INSERT INTO S_PASSWORD (ID, CURRENT_PASSWORD, OLD_PASSWORD)
     VALUES ('pa00001', '{bcrypt}$2a$10$kTAw0Z.BXg6UfH9b1UioE.cZl7ObfpT9RWGULtfOUjE5B3g8ZJhKK', null),
     ('pa00002', '{bcrypt}$2a$10$kTAw0Z.BXg6UfH9b1UioE.cZl7ObfpT9RWGULtfOUjE5B3g8ZJhKK', null);
 
@@ -26,8 +26,8 @@ INSERT INTO S_USERS_PASSWORDS (ID_USER, ID_PASSWORD)
     ('u00005', 'pa00001');
 
 INSERT INTO S_ROLES (ID, NAME)
-    VALUES ('r00001', 'role_admin'),
-    ('r00002', 'role_user');
+    VALUES ('r00001', 'ROLE_ADMIN'),
+    ('r00002', 'ROLE_USER');
 
 INSERT INTO S_PERMISSIONS (ID, LABEL, VALUE)
     VALUES ('pe00001', 'can create source', 'source_create'),

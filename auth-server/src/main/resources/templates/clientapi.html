@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:include="basefragment">
+  <title id="title">Dashboard</title>
+</head>
+<div class="container">
+  <div style="float: right" th:fragment="logout" sec:authorize="isAuthenticated()">
+    <div style="float:left">
+      <span style="font-weight:bold">User: </span><span sec:authentication="name"></span>
+    </div>
+  </div>
+  <div>&nbsp;</div>
+  <h3>Register client API</h3>
+  <div th:unless="${oauthclientdetails}">
+    <a th:href="@{/createclientapi}">Create client API</a>
+  </div>
+  <div th:if="${param.createClientSuccess}" class="alert alert-success" th:text="${param.createClientSuccess}">Successfully registered.</div>
+  <table class="table table-striped">
+    <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Client ID</th>
+      <th scope="col">Redirect Uri</th>
+      <th scope="col">Access Token Validity</th>
+      <th scope="col">Refresh Token Validity</th>
+      <th scope="col"></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="oauthClientDetails, iter : ${oauthClientDetailsList}">
+      <th scope="row" th:text="${iter.count}"></th>
+      <td th:text="${oauthClientDetails.clientId}"></td>
+      <td th:text="${oauthClientDetails.webServerRedirectUri}"></td>
+      <td th:text="${oauthClientDetails.accessTokenValidityDate}"></td>
+      <td th:text="${oauthClientDetails.refreshTokenValidityDate}"></td>
+      <td><a th:href="${'/updateclientapi?id=' + oauthClientDetails.id}">View</a></td>
+    </tr>
+    </tbody>
+  </table>
+</div>

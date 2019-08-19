@@ -1,6 +1,8 @@
 package com.ramusthastudio.authserver.config;
 
 import com.ramusthastudio.authserver.service.UserDetailsServiceImpl;
+import org.springframework.boot.autoconfigure.security.StaticResourceLocation;
+import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -50,14 +52,21 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		aHttp
 			.authorizeRequests(authorizeRequests ->
 				authorizeRequests
+          .requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll()
+          .antMatchers("/login/**").permitAll()
+          .antMatchers("/register/**").permitAll()
 					.antMatchers(HttpMethod.GET, "/oauth/userinfo").hasAuthority("SCOPE_profile")
 					.anyRequest().authenticated()
 			)
-       .formLogin()
-       .permitAll()
+      .formLogin()
+        .loginPage("/login")
+        .permitAll()
+        .and()
+      .logout()
+        .permitAll()
       .and()
 			  .oauth2ResourceServer()
-				  .jwt(withDefaults());
+				 .jwt(withDefaults());
 		// @formatter:on
   }
 }

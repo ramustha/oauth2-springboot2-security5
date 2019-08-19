@@ -8,12 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-public class ProfileController {
-
-  @GetMapping("/userinfo")
-  public Object userinfo(Principal aPrincipal) {
-    return aPrincipal;
-  }
+public class OauthController {
 
   // this provide for oauth client
   @GetMapping("/oauth/userinfo")

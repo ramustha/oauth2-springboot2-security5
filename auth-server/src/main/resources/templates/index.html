@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:include="basefragment">
+  <title id="title">Dashboard</title>
+</head>
+<div class="container">
+  <div style="float: right" th:fragment="logout" sec:authorize="isAuthenticated()">
+    <div style="float:left">
+      <span style="font-weight:bold">User: </span><span sec:authentication="name"></span>
+    </div>
+    <div style="float:none">&nbsp;</div>
+    <div style="float:right">
+      <form action="#" th:action="@{/logout}" method="post">
+        <input type="submit" value="Logout"/>
+      </form>
+    </div>
+  </div>
+  <h3>DASHBOARD</h3>
+  <div>
+    You are successfully logged in <span style="font-weight:bold" th:text="${user.username}"></span>
+  </div>
+  <div>&nbsp;</div>
+  <div class="alert alert-success"><a th:href="@{/clientapi}">View client API</a></div>
+  <div>
+    <span style="font-weight:bold">User Info:</span>
+    <ul>
+      <li><span style="font-weight:bold">ID</span>: <span th:text="${user.id}"></span></li>
+      <li><span style="font-weight:bold">Username</span>: <span th:text="${user.username}"></span></li>
+      <li><span style="font-weight:bold">Email</span>: <span th:text="${user.email}"></span></li>
+      <li><span style="font-weight:bold">Enabled</span>: <span th:text="${user.enabled}"></span></li>
+      <li><span style="font-weight:bold">Account NonExpired</span>: <span th:text="${user.isAccountNonExpired()}"></span></li>
+      <li><span style="font-weight:bold">Credentials NonExpired</span>: <span th:text="${user.isCredentialsNonExpired()}"></span></li>
+      <li><span style="font-weight:bold">Account NonLocked</span>: <span th:text="${user.isAccountNonLocked()}"></span></li>
+
+      <li><span style="font-weight:bold">Roles:</span></li>
+      <ul>
+        <li th:each="roles : ${user.roles}">
+          <span style="font-weight:bold" th:text="${roles.name}"></span>
+          <ul>
+            <li th:each="permissions : ${roles.permissions}">
+              <span style="font-weight:bold" th:text="${permissions.value}"></span>: <span th:text="${permissions.label}"></span>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </ul>
+  </div>
+</div>
+</html>

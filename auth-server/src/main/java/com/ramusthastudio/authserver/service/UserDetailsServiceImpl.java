@@ -1,6 +1,6 @@
 package com.ramusthastudio.authserver.service;
 
-import com.ramusthastudio.authserver.domain.Users;
+import com.ramusthastudio.authserver.domain.User;
 import com.ramusthastudio.authserver.repo.UserRepository;
 import org.springframework.security.authentication.AccountStatusUserDetailsChecker;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -19,13 +19,13 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
   @Override
   public UserDetails loadUserByUsername(String aUsername) throws UsernameNotFoundException {
-    Users users = userRepository.findByUsername(aUsername);
+    User user = userRepository.findByUsername(aUsername);
 
-    if (users == null) {
+    if (user == null) {
       throw new BadCredentialsException(aUsername + " no found.");
     }
 
-    new AccountStatusUserDetailsChecker().check(users);
-    return users;
+    new AccountStatusUserDetailsChecker().check(user);
+    return user;
   }
 }

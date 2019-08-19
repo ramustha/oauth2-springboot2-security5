@@ -1,1 +1,2 @@
 http://localhost:9999/oauth/authorize?client_id=c00001&grant_type=authorization_code&response_type=code
+http://localhost:9999/oauth/authorize?client_id=mIgkfulKYYXTpEEIPqYTCGrItPIBTyjEwZr_admin&grant_type=authorization_code&response_type=code

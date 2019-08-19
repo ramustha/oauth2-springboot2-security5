@@ -8,9 +8,10 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.GenericGenerator;
@@ -18,6 +19,7 @@ import org.hibernate.annotations.GenericGenerator;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 @Entity
 @Table(name = "s_roles")
 public class Roles implements Serializable {
@@ -28,7 +30,7 @@ public class Roles implements Serializable {
   private String id;
   private String name;
 
-  @ManyToMany(fetch = FetchType.EAGER)
+  @OneToMany(fetch = FetchType.EAGER)
   @JoinTable(name = "s_permissions_roles", joinColumns = {
       @JoinColumn(name = "id_role", referencedColumnName = "id")
   },
