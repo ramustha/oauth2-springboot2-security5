@@ -1,10 +1,12 @@
 jQuery(function ($) {
-  if (/clientapi/.test(location.pathname)) {
+  var path = location.pathname;
+
+  if (/clientapi/.test(path)) {
     $('li').removeClass('active');
     $('li .clientapi').addClass('active');
-  } else if (/users/.test(location.pathname)) {
+  } else if (/user/.test(path)) {
     $('li').removeClass('active');
-    $('li .users').addClass('active');
+    $('li .user').addClass('active');
   } else {
     $('li').removeClass('active');
     $('li .home').addClass('active');

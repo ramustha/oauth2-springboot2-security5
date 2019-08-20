@@ -32,7 +32,7 @@
         <a class="nav-link home" th:href="@{/}">Home <span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item" sec:authorize="hasRole('ROLE_ADMIN')">
-        <a class="nav-link users" th:href="@{/users}">Users</a>
+        <a class="nav-link user" th:href="@{/user}">Users</a>
       </li>
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle clientapi" href="#" id="navbarDropdown" role="button"

@@ -19,7 +19,6 @@ jQuery(function ($) {
         var token = response.access_token;
         $('#token').html(token);
         $('#generateId').trigger('reset');
-        console.log(token);
       },
       error: function (xhr, status, errorThrown) {
         //Here the status code can be retrieved like;

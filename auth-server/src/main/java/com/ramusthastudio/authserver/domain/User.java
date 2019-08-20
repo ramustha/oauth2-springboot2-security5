@@ -5,12 +5,10 @@ import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -41,12 +39,14 @@ public class User implements UserDetails {
   private String id;
   private String username;
   private String email;
+  private String currentPassword;
   private boolean enabled;
   private boolean isAccountNonExpired;
   private boolean isCredentialsNonExpired;
   private boolean isAccountNonLocked;
 
-  @ManyToMany(fetch = FetchType.EAGER)
+  @LazyCollection(LazyCollectionOption.FALSE)
+  @OneToMany
   @JoinTable(name = "s_users_roles", joinColumns = {
       @JoinColumn(name = "id_user", referencedColumnName = "id")
   },
@@ -56,7 +56,8 @@ public class User implements UserDetails {
   private List<Roles> roles;
 
   @JsonIgnore
-  @OneToOne(fetch = FetchType.EAGER)
+  @LazyCollection(LazyCollectionOption.FALSE)
+  @OneToOne
   @JoinTable(name = "s_users_passwords", joinColumns = {
       @JoinColumn(name = "id_user", referencedColumnName = "id")
   },
@@ -90,6 +91,9 @@ public class User implements UserDetails {
   @JsonIgnore
   @Override
   public String getPassword() {
-    return password.getCurrentPassword();
+    if (password != null) {
+      currentPassword = password.getCurrentPassword();
+    }
+    return currentPassword;
   }
 }

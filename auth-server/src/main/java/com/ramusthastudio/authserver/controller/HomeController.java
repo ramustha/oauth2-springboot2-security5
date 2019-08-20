@@ -1,15 +1,13 @@
 package com.ramusthastudio.authserver.controller;
 
 import com.ramusthastudio.authserver.domain.Password;
-import com.ramusthastudio.authserver.domain.Roles;
 import com.ramusthastudio.authserver.domain.User;
-import com.ramusthastudio.authserver.publicapi.UserPublic;
 import com.ramusthastudio.authserver.repo.PaswordRepository;
 import com.ramusthastudio.authserver.repo.PermissionsRepository;
 import com.ramusthastudio.authserver.repo.RolesRepository;
 import com.ramusthastudio.authserver.repo.UserRepository;
 import java.security.Principal;
-import java.util.List;
+import java.util.Collections;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -51,15 +49,14 @@ public class HomeController {
 
   @GetMapping("/register")
   public String register(Model aModel) {
-    aModel.addAttribute("newUser", new UserPublic());
+    aModel.addAttribute("newUser", new User());
     return "register";
   }
 
   @PostMapping("/register")
-  public String register(Model aModel, @ModelAttribute("newUser") UserPublic aNewUser) {
-    String encodePassword = passwordEncoder.encode(aNewUser.getPassword());
+  public String register(Model aModel, @ModelAttribute("newUser") User aNewUser) {
+    String encodePassword = passwordEncoder.encode(aNewUser.getCurrentPassword());
     Password userPassword = paswordRepository.save(Password.builder().currentPassword(encodePassword).build());
-    List<Roles> userRoles = rolesRepository.findByNameNotLikeAdmin();
 
     User newUser = User.builder()
         .username(aNewUser.getUsername())
@@ -68,7 +65,7 @@ public class HomeController {
         .isAccountNonExpired(true)
         .isCredentialsNonExpired(true)
         .isAccountNonLocked(true)
-        .roles(userRoles)
+        .roles(Collections.singletonList(rolesRepository.findByName("ROLE_USER")))
         .password(userPassword)
         .build();
 

@@ -10,7 +10,8 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional
 @Repository
 public interface RolesRepository extends PagingAndSortingRepository<Roles, String> {
-  @Query("select r from Roles r where r.name not like 'ROLE_ADMIN'")
-  // @Query("select r from Roles r")
-  List<Roles> findByNameNotLikeAdmin();
+  @Query("select r from Roles r where r.name not like 'ROLE_SYSTEM'")
+  List<Roles> findAllWithoutSystem();
+
+  Roles findByName(String aName);
 }

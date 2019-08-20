@@ -3,18 +3,19 @@ package com.ramusthastudio.authserver.domain;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
-import javax.persistence.OneToMany;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 
 @Data
 @AllArgsConstructor
@@ -30,7 +31,8 @@ public class Roles implements Serializable {
   private String id;
   private String name;
 
-  @OneToMany(fetch = FetchType.EAGER)
+  @LazyCollection(LazyCollectionOption.FALSE)
+  @ManyToMany
   @JoinTable(name = "s_permissions_roles", joinColumns = {
       @JoinColumn(name = "id_role", referencedColumnName = "id")
   },
